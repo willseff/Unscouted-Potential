@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn import metrics
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.cross_validation import cross_val_score
+from sklearn.model_selection import KFold, cross_val_score
 import pickle
 
 dataset = pd.read_csv('Workbook5Clean.csv')

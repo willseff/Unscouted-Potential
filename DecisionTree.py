@@ -5,7 +5,7 @@ from sklearn import metrics
 from sklearn.tree import DecisionTreeClassifier
 from sklearn import tree
 from sklearn import preprocessing
-from sklearn.cross_validation import KFold, cross_val_score
+from sklearn.model_selection import KFold, cross_val_score
 
 # prepare datasets to be fed in the regression model
 dataset = pd.read_csv('Workbook5Clean.csv')
