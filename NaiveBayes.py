@@ -3,7 +3,7 @@ import pandas as pd
 from sklearn import metrics
 from sklearn.naive_bayes import GaussianNB
 import numpy as np
-from sklearn.cross_validation import KFold, cross_val_score
+from sklearn.model_selection import KFold, cross_val_score
 from sklearn.naive_bayes import MultinomialNB
 
 dataset = pd.read_csv('Workbook5Clean.csv')
