@@ -1,8 +1,9 @@
 import csv
 import pandas as pd
 import numpy as np
-import pandas_profiling
 
-dataset = pd.read_csv('Workbook5Clean.csv')
+df = pd.read_csv('Workbook5Clean.csv')
 
-pandas_profiling.ProfileReport(dataset)
+df['Class'] = df['Class'].astype('category')
+df['Pos'] = df['Pos'].astype('category')
+df['Drafted'] = df['Pos'].astype('category')
