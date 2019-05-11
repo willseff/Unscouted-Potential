@@ -3,22 +3,24 @@ import pandas as pd
 from sklearn import metrics
 from sklearn.naive_bayes import GaussianNB
 import numpy as np
-from sklearn.model_selection import KFold, cross_val_score
+from sklearn.model_selection import KFold, cross_val_score, train_test_split
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import confusion_matrix
 
 dataset = pd.read_csv('Workbook5Clean.csv')
-print(dataset)
 
 # prepare datasets to be fed into the naive bayes model
-#predict attend class given extra hours and grade
-CV =  dataset.Drafted.reshape((len(dataset.Drafted), 1))
-data = (dataset.ix[:,'Class':'USGp'].values).reshape((len(dataset.Drafted), 32))
+CV = dataset.Drafted
+
+data = (dataset.loc[:,'Class':'USGp'].values)
+
+x_train, x_test, y_train, y_test = train_test_split(data,CV,test_size = 0.25 , random_state = 42)
 
 # Create model object
 NB = GaussianNB()
 
 # Train the model using the training sets
-NB.fit(data, CV)
+NB.fit(x_train, y_train)
 
 #Model
 print("Probability of the classes: ", NB.class_prior_)
@@ -26,7 +28,13 @@ print("Mean of each feature per class:\n", NB.theta_)
 print("Variance of each feature per class:\n", NB.sigma_)
 
 #predict the class for each data point
-predicted = NB.predict(data)
+predicted = NB.predict(x_test)
+print (predicted)
+
+cm = confusion_matrix(y_test,predicted)
+
+print(cm)
+
 print("Predictions:\n",np.array([predicted]).T)
 
 df = pd.DataFrame()
