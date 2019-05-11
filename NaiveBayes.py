@@ -23,19 +23,18 @@ NB = GaussianNB()
 NB.fit(x_train, y_train)
 
 #Model
-print("Probability of the classes: ", NB.class_prior_)
-print("Mean of each feature per class:\n", NB.theta_)
-print("Variance of each feature per class:\n", NB.sigma_)
+#print("Probability of the classes: ", NB.class_prior_)
+#print("Mean of each feature per class:\n", NB.theta_)
+#print("Variance of each feature per class:\n", NB.sigma_)
 
 #predict the class for each data point
 predicted = NB.predict(x_test)
-print (predicted)
 
 cm = confusion_matrix(y_test,predicted)
 
 print(cm)
 
-print("Predictions:\n",np.array([predicted]).T)
+#print("Predictions:\n",np.array([predicted]).T)
 
 df = pd.DataFrame()
 df = np.array([predicted]).T
@@ -45,15 +44,16 @@ with open('NBPredictions.csv', 'w') as fp:
 
 # predict the probability/likelihood of the prediction
 prob_of_pred = NB.predict_proba(data)
-print("Probability of each class for the prediction: \n",prob_of_pred)
+#print("Probability of each class for the prediction: \n",prob_of_pred)
 
-print("Accuracy of the model: ",NB.score(data,CV))
+#print("Accuracy of the model: ",NB.score(data,CV))
 
-#print("The confusion matrix:\n", metrics.confusion_matrix(CV, predicted, ['No','Yes']))
+#print("The confusion matrix:\n", confusion_matrix(y_test, predicted, ['No','Yes']))
 
 # Calculating 5 fold cross validation results
+print("start")
 model = GaussianNB()
-kf = KFold(len(CV), n_folds=10)
+kf = KFold(n_splits=10)
 scores = cross_val_score(model, data, CV, cv=kf)
 print("Accuracy of every fold in 10 fold cross validation: ", abs(scores))
-print("Mean of the 5 fold cross-validation: %0.2f" % abs(scores.mean()))
+print("Mean of the 10 fold cross-validation: %0.2f" % abs(scores.mean()))
