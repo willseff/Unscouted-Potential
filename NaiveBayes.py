@@ -44,6 +44,7 @@ with open('NBPredictions.csv', 'w') as fp:
 
 # predict the probability/likelihood of the prediction
 prob_of_pred = NB.predict_proba(data)
+
 #print("Probability of each class for the prediction: \n",prob_of_pred)
 
 #print("Accuracy of the model: ",NB.score(data,CV))
