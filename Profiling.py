@@ -24,12 +24,8 @@ plt.scatter(df['FG'],df['FGA'])
 
 #box plot of SOS of drafted and undrafted players
 df_sosByDrafted = df[['SOS','Drafted']]
-print(df_sosByDrafted)
-df_sosByDrafted.SOS = df_sosByDrafted.SOS.apply(str)
-df_sosByDrafted.Drafted = df_sosByDrafted.Drafted.apply(str)
-print(df_sosByDrafted)
 df_sos_undrafted = df_sosByDrafted.loc(df_sosByDrafted['Drafted'] == 0)
-print(df_sos_undrafted)
+
 
 # find correlations between numerical values
 corr = df.corr()
