@@ -21,11 +21,19 @@ print(table_draftedByPos)
 
 #correlation between points and drafted (very trivial)
 plt.scatter(df['FG'],df['FGA'])
+plt.show()
 
 #box plot of SOS of drafted and undrafted players
 df_sosByDrafted = df[['SOS','Drafted']]
-df_sos_undrafted = df_sosByDrafted.loc(df_sosByDrafted['Drafted'] == 0)
 
+#subset data into drafted and undrafted
+df_sos_undrafted = df_sosByDrafted.loc[df_sosByDrafted['Drafted'] == 0]
+df_sos_drafted = df_sosByDrafted.loc[df_sosByDrafted['Drafted'] == 1]
+
+#crea3te box plot
+
+plt.boxplot([df_sos_undrafted.SOS,df_sos_drafted.SOS])
+plt.show()
 
 # find correlations between numerical values
 corr = df.corr()
