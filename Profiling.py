@@ -8,6 +8,7 @@ import seaborn as sns
 df = pd.read_csv('Workbook5Clean.csv')
 
 plt.style.use('classic')
+fig = plt.figure()
 
 #turn certain columns into categories
 df['Class'] = df['Class'].astype('category')
@@ -33,6 +34,7 @@ plt.subplot(2,2,1)
 plt.boxplot([df_sos_undrafted.SOS,df_sos_drafted.SOS])
 plt.ylabel('SOS')
 plt.title("SOS", fontsize=12)
+plt.xticks([1,2],['Undrafted','Drafted'])
 
 plt.subplot(2,2,2)
 plt.scatter(df['FG'],df['FGA'])
@@ -41,10 +43,16 @@ plt.title("FG vs FGA", fontsize=12)
 plt.subplot(2,2,3)
 plt.boxplot([df_sos_undrafted.USGp,df_sos_drafted.USGp])
 plt.title("USGp", fontsize=12)
+plt.xticks([1,2],['Undrafted','Drafted'])
 
 plt.subplot(2,2,4)
 plt.hist(df.TRB,20)
 plt.title("TRB", fontsize=12)
+
+plt.tight_layout()
+plt.show()
+
+fig.savefig('figures')
 
 # find correlations between numerical values
 corr = df.corr()
