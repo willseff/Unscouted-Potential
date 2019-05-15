@@ -19,21 +19,29 @@ y = df_draftedByPosition.Drafted
 table_draftedByPos = pd.crosstab(x,y, rownames = ['x'], colnames = ['y'])
 print(table_draftedByPos)
 
-#correlation between points and drafted (very trivial)
-plt.scatter(df['FG'],df['FGA'])
-plt.show()
-
 #box plot of SOS of drafted and undrafted players
 df_sosByDrafted = df[['SOS','Drafted']]
 
 #subset data into drafted and undrafted
-df_sos_undrafted = df_sosByDrafted.loc[df_sosByDrafted['Drafted'] == 0]
-df_sos_drafted = df_sosByDrafted.loc[df_sosByDrafted['Drafted'] == 1]
+df_sos_undrafted = df.loc[df_sosByDrafted['Drafted'] == 0]
+df_sos_drafted = df.loc[df_sosByDrafted['Drafted'] == 1]
 
-#crea3te box plot
-
+#both scatter and box plots as subplots
+plt.subplot(2,2,1)
 plt.boxplot([df_sos_undrafted.SOS,df_sos_drafted.SOS])
-plt.show()
+plt.ylabel('SOS')
+plt.title("SOS", fontsize=12)
+
+plt.subplot(2,2,2)
+plt.scatter(df['FG'],df['FGA'])
+plt.title("FG vs FGA", fontsize=12)
+
+plt.subplot(2,2,3)
+plt.boxplot([df_sos_undrafted.USGp,df_sos_drafted.USGp])
+plt.title("USGp", fontsize=12)
+
+plt.subplot(2,2,4)
+plt.hist(df.TRB,20)
 
 # find correlations between numerical values
 corr = df.corr()
