@@ -7,6 +7,8 @@ import seaborn as sns
 #import data
 df = pd.read_csv('Workbook5Clean.csv')
 
+plt.style.use('classic')
+
 #turn certain columns into categories
 df['Class'] = df['Class'].astype('category')
 df['Pos'] = df['Pos'].astype('category')
@@ -42,6 +44,7 @@ plt.title("USGp", fontsize=12)
 
 plt.subplot(2,2,4)
 plt.hist(df.TRB,20)
+plt.title("TRB", fontsize=12)
 
 # find correlations between numerical values
 corr = df.corr()
