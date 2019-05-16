@@ -30,11 +30,16 @@ df_sos_undrafted = df.loc[df_sosByDrafted['Drafted'] == 0]
 df_sos_drafted = df.loc[df_sosByDrafted['Drafted'] == 1]
 
 #both scatter and box plots as subplots
-plt.subplot(2,2,1)
-plt.boxplot([df_sos_undrafted.SOS,df_sos_drafted.SOS])
-plt.ylabel('SOS')
-plt.title("SOS", fontsize=12)
-plt.xticks([1,2],['Undrafted','Drafted'])
+fig = plt.figure()
+ax = fig.add_subplot(221)
+cax = ax.boxplot([df_sos_undrafted.SOS,df_sos_drafted.SOS])
+ax.set_title('SOS')
+
+#plt.subplot(2,2,1)
+#plt.boxplot([df_sos_undrafted.SOS,df_sos_drafted.SOS])
+#plt.ylabel('SOS')
+#plt.title("SOS", fontsize=12)
+#plt.xticks([1,2],['Undrafted','Drafted'])
 
 plt.subplot(2,2,2)
 plt.scatter(df['FG'],df['FGA'])
@@ -56,16 +61,22 @@ fig.savefig('figures')
 
 # find correlations between numerical values
 corr = df.corr()
+corr.style.background_gradient(cmap='coolwarm')
+
 
 #get column names
 names = list(df.columns.values)
+names.pop()
+names.pop(0)
+names.pop(0)
+names.pop(0)
 
 #show corrplot
 fig = plt.figure()
 ax = fig.add_subplot(111)
 cax = ax.matshow(corr, vmin=-1, vmax=1)
 fig.colorbar(cax)
-ticks = np.arange(0,34,1)
+ticks = np.arange(0,31,1)
 ax.set_xticks(ticks)
 ax.set_yticks(ticks)
 ax.set_xticklabels(names, rotation=90)
